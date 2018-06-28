@@ -39,11 +39,11 @@
         <Budgets v-else-if="!budgetId" :budgets="budgets" :selectBudget="selectBudget" />
 
         <!-- If a budget has been selected, display transactions from that budget 
-        -->
         <div v-else>
           <Transactions :transactions="transactions" />
           <button class="btn btn-info" @click="budgetId = null">&lt; Select Another Budget</button>
         </div>
+        -->
         <!-- If a budget has been selected, display accounts from that budget -->
         <div v-else>
           <Accounts :accounts="accounts" />
@@ -85,6 +85,7 @@ export default {
       budgetId: null,
       budgets: [],
       transactions: [],
+      accounts: [],
     }
   },
   // When this component is created, check whether we need to get a token,
@@ -95,6 +96,7 @@ export default {
       this.api = new ynab.api(this.ynab.token);
       if (!this.budgetId) {
         this.getBudgets();
+        this.getAccounts();
       } else {
         this.selectBudget(this.budgetId);
       }
@@ -107,6 +109,17 @@ export default {
       this.error = null;
       this.api.budgets.getBudgets().then((res) => {
         this.budgets = res.data.budgets;
+      }).catch((err) => {
+        this.error = err.error.detail;
+      }).finally(() => {
+        this.loading = false;
+      });
+    },
+    getAccounts() {
+      this.loading = true;
+      this.error = null;
+      this.api.accounts.getAccounts().then((res) => {
+        this.budgets = res.data.accounts;
       }).catch((err) => {
         this.error = err.error.detail;
       }).finally(() => {
