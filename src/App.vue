@@ -44,12 +44,11 @@
           <Transactions :transactions="transactions" />
           <button class="btn btn-info" @click="budgetId = null">&lt; Select Another Budget</button>
         </div>
-        <!-- If a budget has been selected, display accounts from that budget 
+        <!-- If a budget has been selected, display accounts from that budget -->
         <div v-else>
           <Accounts :accounts="accounts" />
           <button class="btn btn-info" @click="budgetId = null">&lt; Select Another Budget</button>
         </div>
--->
 
       </div>
 

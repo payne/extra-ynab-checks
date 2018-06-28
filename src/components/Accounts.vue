@@ -9,7 +9,7 @@
     </thead>
     <tbody>
       <tr v-for="account in accounts" v-bind:key="account.id">
-        <td>{{account.account_name}}</td>
+        <td>{{account.name}}</td>
       </tr>
     </tbody>
     </table>
