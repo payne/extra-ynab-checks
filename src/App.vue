@@ -99,6 +99,7 @@ export default {
         this.getAccounts();
       } else {
         this.selectBudget(this.budgetId);
+        this.getAccounts(this.budgetId);
       }
     }
   },
@@ -115,10 +116,10 @@ export default {
         this.loading = false;
       });
     },
-    getAccounts() {
+    getAccounts(id) {
       this.loading = true;
       this.error = null;
-      this.api.accounts.getAccounts().then((res) => {
+      this.api.accounts.getAccounts(id).then((res) => {
         this.budgets = res.data.accounts;
       }).catch((err) => {
         this.error = err.error.detail;
