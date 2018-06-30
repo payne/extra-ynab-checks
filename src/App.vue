@@ -117,10 +117,13 @@ export default {
       });
     },
     getAccounts(id) {
+      console.log(`gudgetId=${id}`);
       this.loading = true;
       this.error = null;
       this.api.accounts.getAccounts(id).then((res) => {
-        this.budgets = res.data.accounts;
+        this.accounts = res.data.accounts;
+        console.log(this.accounts);
+        console.log(`those are the accounts.`);
       }).catch((err) => {
         this.error = err.error.detail;
       }).finally(() => {
