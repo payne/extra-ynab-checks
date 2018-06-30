@@ -98,6 +98,7 @@ export default {
         this.getBudgets();
         this.getAccounts();
       } else {
+        console.log(`select budget and get accounts ${this.budgetId}`);
         this.selectBudget(this.budgetId);
         this.getAccounts(this.budgetId);
       }
@@ -117,18 +118,20 @@ export default {
       });
     },
     getAccounts(id) {
-      console.log(`gudgetId=${id}`);
-      this.loading = true;
-      this.error = null;
-      this.api.accounts.getAccounts(id).then((res) => {
-        this.accounts = res.data.accounts;
-        console.log(this.accounts);
-        console.log(`those are the accounts.`);
-      }).catch((err) => {
-        this.error = err.error.detail;
-      }).finally(() => {
-        this.loading = false;
-      });
+      console.log(`budgetId=${id}`);
+      if (id) {
+							this.loading = true;
+							this.error = null;
+							this.api.accounts.getAccounts(id).then((res) => {
+								this.accounts = res.data.accounts;
+								console.log(this.accounts);
+								console.log(`those are the accounts.`);
+							}).catch((err) => {
+								this.error = err.error.detail;
+							}).finally(() => {
+								this.loading = false;
+							});
+      }
     },
     // This selects a budget and gets all the transactions in that budget
     selectBudget(id) {
