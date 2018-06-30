@@ -96,7 +96,7 @@ export default {
       this.api = new ynab.api(this.ynab.token);
       if (!this.budgetId) {
         this.getBudgets();
-        this.getAccounts();
+        // this.getAccounts();
       } else {
         console.log(`select budget and get accounts ${this.budgetId}`);
         this.selectBudget(this.budgetId);
