@@ -40,8 +40,10 @@
 
         <!-- If a budget has been selected, display transactions from that budget -->
         <div v-else>
+<!--          
+-->
+          <Accounts :accounts="accounts" /> 
           <Transactions :transactions="transactions" />
-<!--          <Accounts :accounts="accounts" /> -->
           <button class="btn btn-info" @click="budgetId = null">&lt; Select Another Budget</button>
         </div>
 
@@ -95,7 +97,6 @@ export default {
       } else {
         console.log(`select budget and get accounts ${this.budgetId}`);
         this.selectBudget(this.budgetId);
-        this.getAccounts(this.budgetId);
       }
     }
   },
@@ -141,6 +142,7 @@ export default {
       }).finally(() => {
         this.loading = false;
       });
+      this.getAccounts(this.budgetId);
     },
     // This builds a URI to get an access token from YNAB
     // https://api.youneedabudget.com/#outh-applications
